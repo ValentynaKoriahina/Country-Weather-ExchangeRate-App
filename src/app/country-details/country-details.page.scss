@@ -1,0 +1,15 @@
+p {
+  color: gray;
+}
+
+ion-img::part(image) {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.602);
+}
+
+ion-img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+

@@ -1,0 +1,15 @@
+<ion-content color="light">
+  <!-- Search string bound to the searchText variable of the component -->
+  <ion-searchbar show-clear-button="always" [(ngModel)]="searchText"></ion-searchbar>
+  <ion-card>
+    <ion-list [inset]="true">
+      <!-- Cycle *ngFor to loop through all items in the filtered list of countries -->
+      <ion-item *ngFor="let country of countriesToDisplay">
+        <!-- Navigation link to the country details page -->
+        <p [routerLink]="['/country-details', country.cca2]">
+          {{ country.name.official }}
+        </p>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

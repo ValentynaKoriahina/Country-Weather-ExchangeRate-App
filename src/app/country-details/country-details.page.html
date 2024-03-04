@@ -1,0 +1,46 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">country-details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <div class="ion-margin">
+      <ion-img src="{{ countryFlag }}" alt="flag" style="width: 400px;"></ion-img>
+
+      <h1> {{ countryOfficialName }} </h1>
+      <p> {{ countryCapital }} </p>
+      <p> {{ forecast }} </p>
+
+      <!-- Using pipe number to format a number  -->
+      <!-- https://angular.io/guide/pipes -->
+      <p> {{ countryPopulation | number }} </p>
+
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Languages</ion-label>
+        </ion-list-header>
+        <!-- Use Pipe keyvalue to convert the object into an array of key-value pairs for easier iteration -->
+        <!-- https://angular.io/api/common/KeyValuePipe -->
+        <ion-item *ngFor="let lang of countryLanguages | keyvalue">
+          <ion-label>{{ lang.value }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <!-- 
+        Currency block. 
+        - keyup.enter is a way to call the required method not by pressing the button, but by pressing enter;
+        - the input field type is set as number using min="0", which restricts the input to numbers >= 0 only.
+        https://www.geeksforgeeks.org/angular-keyup-event/
+      -->
+      <ion-input placeholder="Enter {{ currencyCode }} amount:" [(ngModel)]="enteredAmount"
+        (keyup.enter)="convertToEUR()" type="number" min="0"></ion-input>
+      <!-- The value [disabled]="!enteredAmount" allows to activate/deactivate the button depending on the contents of the input field -->
+      <ion-button [disabled]="!enteredAmount" (click)="convertToEUR()">CONVERT TO EUR</ion-button>
+      <!-- Applying the *ngIf directive to conditionally display a tag when the conversionResult variable is not null-->
+      <!-- https://angular.io/api/common/NgIf -->
+      <p *ngIf="conversionResult">{{ conversionResult }}</p>
+    </div>
+  </ion-card>
+</ion-content>
